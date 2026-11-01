@@ -82,7 +82,7 @@ exports.changePassword = asyncHandler(async (req, res) => {
   res.cookie("refreshToken", refreshToken, {
     httpOnly: true,
     secure: isProd,
-    sameSite: "lax",
+    sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
     path: "/api/auth",
     maxAge: 24 * 60 * 60 * 1000,
   });

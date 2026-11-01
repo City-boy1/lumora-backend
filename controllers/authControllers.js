@@ -71,7 +71,7 @@ const handleLogin = async (req, res) => {
         res.cookie("refreshToken", refreshToken, {
             httpOnly: true,
             secure: isProd, // HTTPS only in production; plain http still works on localhost
-            sameSite: "lax",
+            sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
             path: "/api/auth",
             maxAge: 24 * 60 * 60 * 1000
         });
